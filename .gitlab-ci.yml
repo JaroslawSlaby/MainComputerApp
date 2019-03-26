@@ -1,0 +1,22 @@
+image: java:8-jdk
+
+before_script:
+  - export GRADLE_USER_HOME=`pwd`/.gradle
+
+stages:
+  - test
+  - build
+
+test:
+  stage: test
+  script: gradle clean test
+
+build:
+  stage: build
+  script: gradle clean jar
+  artifacts:
+    paths:
+    - build/libs/*.jar
+    expire_in: 1 week
+  only:
+  - master

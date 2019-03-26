@@ -1,11 +1,10 @@
 package pl.edu.pk.mech.datawrapper;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.logging.Logger;
 
 public class LoggerPresenter implements Presenter {
 
-    private static Logger logger = LoggerFactory.getLogger(LoggerPresenter.class);
+    private static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     @Override
     public void update(String data) {
