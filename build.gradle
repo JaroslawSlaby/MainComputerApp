@@ -17,7 +17,7 @@ dependencies {
     // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core
     compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.11.2'
     // https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12
-//    testCompile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.8.0-beta2'
+    compile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.8.0-beta2'
     // https://mvnrepository.com/artifact/org.testng/testng
     testCompile group: 'org.testng', name: 'testng', version: '6.14.3'
 
