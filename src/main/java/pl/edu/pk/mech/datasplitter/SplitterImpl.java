@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 class SplitterImpl implements Splitter {
 
-    public Map<String, String> splitData(String data) {
+    public Map<String, String> splitData(String data) { //TODO: add custom exceptions
         if(data == null || data.isEmpty())
             throw new IllegalArgumentException("Empty data frame");
 
