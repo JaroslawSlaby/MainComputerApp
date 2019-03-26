@@ -3,7 +3,7 @@ package pl.edu.pk.mech.datawrapper;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Wrapper {
+public class PresentersHandler {
 
     private List<Presenter> presenters = new ArrayList<>();
 
