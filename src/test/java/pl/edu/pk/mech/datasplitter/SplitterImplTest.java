@@ -7,8 +7,10 @@ import org.testng.annotations.Test;
 import java.util.Collections;
 import java.util.Map;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
+@Test
 public class SplitterImplTest {
 
     private Splitter splitter;
@@ -18,10 +20,9 @@ public class SplitterImplTest {
         splitter = new SplitterImpl();
     }
 
-    @Test
-    public void testSplitData_WithOKInput() {
+    public void testSplitData_WithOKInput() throws Exception {
         //given
-        String input = "L:3;AA:10;BB:10;CC:10";
+        String input = "L:3;AA:10;BB:10;CC:10;";
         //when
         Map<String, String> splitdata = splitter.splitData(input);
         //then
@@ -31,10 +32,9 @@ public class SplitterImplTest {
         assertTrue(splitdata.containsKey("CC"));
     }
 
-    @Test
-    public void testSplitData_WithOKInput_ContainingOneElement() {
+    public void testSplitData_WithOKInput_ContainingOneElement() throws Exception {
         //given
-        String input = "L:1;AA:10";
+        String input = "L:1;AA:10;";
         //when
         Map<String, String> splitdata = splitter.splitData(input);
         //then
@@ -42,10 +42,9 @@ public class SplitterImplTest {
         assertTrue(splitdata.containsKey("AA"));
     }
 
-    @Test
-    public void testSplitData_WithZeroLengthInput() {
+    public void testSplitData_WithZeroLengthInput() throws Exception {
         //given
-        String input = "L:0";
+        String input = "L:0;";
         //when
         Map<String, String> splitdata = splitter.splitData(input);
         //then
@@ -54,23 +53,23 @@ public class SplitterImplTest {
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
-    public void testSplitData_WithNullInput() {
+    public void testSplitData_WithNullInput() throws Exception {
         //given - when
         splitter.splitData(null);
         //then throw IAE
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
-    public void testSplitData_WithEmptyInput() {
+    public void testSplitData_WithEmptyInput() throws Exception {
         //given - when
         splitter.splitData("");
         //then throw IAE
     }
 
-    @Test(expectedExceptions = IllegalArgumentException.class)
-    public void testSplitData_WithOKInput_AndInvalidNumberOfParams() {
+    @Test(expectedExceptions = DataValidationException.class)
+    public void testSplitData_WithOKInput_AndInvalidNumberOfParams() throws Exception {
         //given
-        String input = "L:2;AA:10;BB:10;CC:10";
+        String input = "L:2;AA:10;BB:10;CC:10;";
         //when
         splitter.splitData(input);
         //then throw exception

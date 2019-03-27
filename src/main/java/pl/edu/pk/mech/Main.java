@@ -1,25 +1,19 @@
 package pl.edu.pk.mech;
 
-import pl.edu.pk.mech.datawrapper.DisplayPresenter;
-import pl.edu.pk.mech.datawrapper.LoggerPresenter;
-import pl.edu.pk.mech.datawrapper.Presenter;
-import pl.edu.pk.mech.datawrapper.PresentersHandler;
+import pl.edu.pk.mech.configuration.OutputSources;
+import pl.edu.pk.mech.datahandler.Handler;
+import pl.edu.pk.mech.datahandler.HandlerImpl;
 
-import java.util.Scanner;
+import java.util.Collections;
+import java.util.Map;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        PresentersHandler presentersHandler = new PresentersHandler();
-        Presenter presenter = new DisplayPresenter();
-        Presenter loggerPresenter = new LoggerPresenter();
-        presentersHandler.addPresenter(presenter);
-        presentersHandler.addPresenter(loggerPresenter);
+        Map<String, String> dupa = Collections.singletonMap("ER", "123");
 
-        Scanner scanner = new Scanner(System.in);
-        String line = scanner.nextLine();
-
-        presentersHandler.update(line);
+        Handler handler = new HandlerImpl(OutputSources.getDisplayParameters());
+        handler.presentData(dupa);
     }
 }

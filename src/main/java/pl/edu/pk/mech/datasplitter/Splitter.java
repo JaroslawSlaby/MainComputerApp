@@ -4,5 +4,5 @@ import java.util.Map;
 
 public interface Splitter {
 
-    Map<String, String> splitData(String data);
+    Map<String, String> splitData(String data) throws DataValidationException;
 }
