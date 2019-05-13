@@ -1,5 +1,7 @@
 package pl.edu.pk.mech.datasplitter;
 
+import pl.edu.pk.mech.configuration.Configuration;
+
 import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -15,12 +17,13 @@ public class SplitterImpl implements Splitter {
             throw new IllegalArgumentException("Empty data frame");
         }
 
-        String[] params = validateData(data);
-
-        return Arrays.stream(params)
+        String[] params = validateData(data.trim());
+        return Arrays.stream(params) //todo: filter this map to remove not used params and add proper tests
                 .skip(1)
                 .map(s -> s.split(":"))
+                .filter(s -> Configuration.possibleParameters.contains(s[0]))
                 .collect(Collectors.toMap(a -> a[0], a -> a[1]));
+
     }
 
     private String[] validateData(String data) throws DataValidationException {
@@ -29,7 +32,7 @@ public class SplitterImpl implements Splitter {
         String size = params[0].split(":")[1];
 
         if(valueOf(size) != (numberOfParams - 1)) {
-            throw new DataValidationException("Invalid data frame");
+            throw new DataValidationException("Invalid data frame: " + data);
         }
 
         return params;
