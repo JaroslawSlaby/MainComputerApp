@@ -22,24 +22,43 @@ public class SplitterImplTest {
 
     public void testSplitData_WithOKInput() throws Exception {
         //given
-        String input = "L:3;AAA:10;BBB:10;CCC:10;";
+        String input = "L:3;VCB:10;ASW:10;UST:10;";
         //when
         Map<String, String> splitdata = splitter.splitData(input);
         //then
         assertEquals(splitdata.size(), 3);
-        assertTrue(splitdata.containsKey("AAA"));
-        assertTrue(splitdata.containsKey("BBB"));
-        assertTrue(splitdata.containsKey("CCC"));
+        assertTrue(splitdata.containsKey("VCB"));
+        assertTrue(splitdata.containsKey("ASW"));
+        assertTrue(splitdata.containsKey("UST"));
     }
 
     public void testSplitData_WithOKInput_ContainingOneElement() throws Exception {
         //given
-        String input = "L:1;AA:10;";
+        String input = "L:1;VCB:10;";
         //when
         Map<String, String> splitdata = splitter.splitData(input);
         //then
         assertEquals(splitdata.size(), 1);
-        assertTrue(splitdata.containsKey("AA"));
+        assertTrue(splitdata.containsKey("VCB"));
+    }
+
+    public void testSplitData_WithOKInput_AndOneIncorrectParameter_ContainingOneElement() throws Exception {
+        //given
+        String input = "L:2;VCB:10;AAA:10;";
+        //when
+        Map<String, String> splitdata = splitter.splitData(input);
+        //then
+        assertEquals(splitdata.size(), 1);
+        assertTrue(splitdata.containsKey("VCB"));
+    }
+
+    public void testSplitData_WithOKInput_AndAllIncorrectParameters_ReturnsEmptyList() throws Exception {
+        //given
+        String input = "L:2;BBB:10;AAA:10;";
+        //when
+        Map<String, String> splitdata = splitter.splitData(input);
+        //then
+        assertEquals(splitdata.size(), 0);
     }
 
     public void testSplitData_WithZeroLengthInput() throws Exception {

@@ -5,7 +5,7 @@ import com.pi4j.io.gpio.Pin;
 import com.pi4j.io.gpio.PinPullResistance;
 import com.pi4j.io.gpio.event.GpioPinListenerDigital;
 
-public final class ButtonHandler implements Runnable {
+public final class ButtonHandler {
 
     private final Pin pin;
     private final String pinName;
@@ -20,15 +20,8 @@ public final class ButtonHandler implements Runnable {
         this.event = event;
     }
 
-    @Override
-    public void run() {
+    public void setUp() {
         GpioPinDigitalInput inputPin = PinCreator.createInputPin(pin, pinName, resistance);
         inputPin.addListener(event);
-
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 }

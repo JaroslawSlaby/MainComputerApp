@@ -8,7 +8,7 @@ public class MainWindow {
     private static JFrame frame = new JFrame();
     private static TextField speed = new TextField();
 
-    public void start() {
+    public void prepareWindow() {
         frame.setTitle("Main app");
         speed.setText("0");
         speed.setEditable(false);

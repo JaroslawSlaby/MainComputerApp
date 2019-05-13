@@ -2,7 +2,7 @@ package pl.edu.pk.mech.connection;
 
 import com.pi4j.io.serial.*;
 import org.slf4j.Logger;
-import pl.edu.pk.mech.configuration.GlobalLogger;
+import pl.edu.pk.mech.configuration.Configuration;
 import pl.edu.pk.mech.datapresenter.PresentersHandler;
 import pl.edu.pk.mech.datasplitter.DataValidationException;
 import pl.edu.pk.mech.datasplitter.Splitter;
@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class SerialListener {
 
-    private static final Logger logger = GlobalLogger.logger;
+    private static final Logger logger = Configuration.logger;
     private final PresentersHandler presenters;
     private final Splitter splitter;
     private Serial connection;
@@ -31,7 +31,7 @@ public class SerialListener {
         createListener();
         SerialConfig config = new SerialConfig();
         config.device(SerialPort.getDefaultPort())
-                .baud(Baud._38400)
+                .baud(Baud._9600)
                 .dataBits(DataBits._8)
                 .parity(Parity.NONE)
                 .stopBits(StopBits._1)
