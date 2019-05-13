@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import static java.util.logging.Logger.GLOBAL_LOGGER_NAME;
 
-class GlobalLogger {
+public class GlobalLogger {
 
-    static final Logger logger = LoggerFactory.getLogger(GLOBAL_LOGGER_NAME);
+    public static final Logger logger = LoggerFactory.getLogger(GLOBAL_LOGGER_NAME);
 }

@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import static java.lang.Integer.valueOf;
 import static org.apache.commons.lang3.StringUtils.countMatches;
 
-class SplitterImpl implements Splitter {
+public class SplitterImpl implements Splitter {
 
     @Override
     public Map<String, String> splitData(String data) throws DataValidationException {

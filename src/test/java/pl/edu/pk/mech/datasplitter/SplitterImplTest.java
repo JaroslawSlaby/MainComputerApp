@@ -22,14 +22,14 @@ public class SplitterImplTest {
 
     public void testSplitData_WithOKInput() throws Exception {
         //given
-        String input = "L:3;AA:10;BB:10;CC:10;";
+        String input = "L:3;AAA:10;BBB:10;CCC:10;";
         //when
         Map<String, String> splitdata = splitter.splitData(input);
         //then
         assertEquals(splitdata.size(), 3);
-        assertTrue(splitdata.containsKey("AA"));
-        assertTrue(splitdata.containsKey("BB"));
-        assertTrue(splitdata.containsKey("CC"));
+        assertTrue(splitdata.containsKey("AAA"));
+        assertTrue(splitdata.containsKey("BBB"));
+        assertTrue(splitdata.containsKey("CCC"));
     }
 
     public void testSplitData_WithOKInput_ContainingOneElement() throws Exception {
