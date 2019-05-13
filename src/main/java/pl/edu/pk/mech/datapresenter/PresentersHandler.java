@@ -1,7 +1,8 @@
-package pl.edu.pk.mech.datawrapper;
+package pl.edu.pk.mech.datapresenter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class PresentersHandler {
 
@@ -15,7 +16,7 @@ public class PresentersHandler {
         presenters.remove(presenter);
     }
 
-    public void update(String data) {
+    public void update(Map<String, String> data) {
         presenters.forEach(presenter -> presenter.update(data));
     }
 }
