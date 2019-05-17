@@ -11,8 +11,9 @@ public class OutputSources {
     public static Map<String, TextField> getGuiElements() {
         Map<String, TextField> elements = new HashMap<>();
         elements.put("VCB", MainWindow.getSpeed());
-//        elements.put("ASW", MainWindow.getSpeed());
-//        elements.put("UST", MainWindow.getSpeed());
+        elements.put("UBT", MainWindow.getBatteriesVoltage());
+        elements.put("TMP", MainWindow.getRightEngineTemp());
+        elements.put("TMR", MainWindow.getLeftEngineTemp());
         return elements;
     }
 }

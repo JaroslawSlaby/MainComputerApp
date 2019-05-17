@@ -10,17 +10,14 @@ public final class ButtonHandler {
     private final Pin pin;
     private final String pinName;
     private final PinPullResistance resistance;
-    private final GpioPinListenerDigital event;
 
-
-    public ButtonHandler(Pin pin, String pinName, PinPullResistance resistance, GpioPinListenerDigital event) {
+    public ButtonHandler(Pin pin, String pinName, PinPullResistance resistance) {
         this.pin = pin;
         this.pinName = pinName;
         this.resistance = resistance;
-        this.event = event;
     }
 
-    public void setUp() {
+    public void setUpEvent(GpioPinListenerDigital event) {
         GpioPinDigitalInput inputPin = PinCreator.createInputPin(pin, pinName, resistance);
         inputPin.addListener(event);
     }

@@ -11,5 +11,5 @@ import static java.util.logging.Logger.GLOBAL_LOGGER_NAME;
 public class Configuration {
 
     public static final Logger logger = LoggerFactory.getLogger(GLOBAL_LOGGER_NAME);
-    public static final List<String> possibleParameters = Arrays.asList("VCB", "ASW", "UST", "UIV"); //todo: add the rest of parameters
+    public static final List<String> possibleParameters = Arrays.asList("VCB", "UBT", "TMR", "TMP"); //todo: add the rest of parameters
 }

@@ -10,33 +10,42 @@ import pl.edu.pk.mech.datasplitter.Splitter;
 import java.io.IOException;
 import java.util.Map;
 
-public class SerialListener {
+import static com.pi4j.io.serial.SerialPort.getDefaultPort;
+
+public class SerialPort {
 
     private static final Logger logger = Configuration.logger;
     private final PresentersHandler presenters;
     private final Splitter splitter;
     private Serial connection;
 
-    public SerialListener(PresentersHandler presenters, Splitter splitter) {
+    public SerialPort(PresentersHandler presenters, Splitter splitter) {
         this.presenters = presenters;
         this.splitter = splitter;
     }
 
-    public SerialListener openConnection() {
+    public SerialPort openConnection() throws IOException, InterruptedException {
         connection = SerialConnectionCreator.createConnection();
-        return this;
-    }
-
-    public void listenOnSerialPort() throws IOException, InterruptedException {
-        createListener();
         SerialConfig config = new SerialConfig();
-        config.device(SerialPort.getDefaultPort())
+        config.device(getDefaultPort())
                 .baud(Baud._9600)
                 .dataBits(DataBits._8)
                 .parity(Parity.NONE)
                 .stopBits(StopBits._1)
                 .flowControl(FlowControl.NONE);
         connection.open(config);
+        return this;
+    }
+
+    public void sendData(String data) throws IOException {
+        if (connection.isOpen()) {
+            connection.write(data);
+            connection.flush();
+        }
+    }
+
+    public void listenOnSerialPort() {
+        createListener();
     }
 
     private void createListener() {

@@ -1,28 +1,27 @@
 package pl.edu.pk.mech.datasplitter;
 
-import pl.edu.pk.mech.configuration.Configuration;
-
 import java.util.Arrays;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import static java.lang.Integer.valueOf;
+import static java.util.stream.Collectors.toMap;
 import static org.apache.commons.lang3.StringUtils.countMatches;
+import static pl.edu.pk.mech.configuration.Configuration.possibleParameters;
 
 public class SplitterImpl implements Splitter {
 
     @Override
     public Map<String, String> splitData(String data) throws DataValidationException {
         if(data == null || data.isEmpty()) {
-            throw new IllegalArgumentException("Empty data frame");
+            throw new DataValidationException("Empty data frame!");
         }
 
         String[] params = validateData(data.trim());
-        return Arrays.stream(params) //todo: filter this map to remove not used params and add proper tests
+        return Arrays.stream(params)
                 .skip(1)
                 .map(s -> s.split(":"))
-                .filter(s -> Configuration.possibleParameters.contains(s[0]))
-                .collect(Collectors.toMap(a -> a[0], a -> a[1]));
+                .filter(s -> possibleParameters.contains(s[0]))
+                .collect(toMap(a -> a[0], a -> a[1]));
 
     }
 
