@@ -22,19 +22,20 @@ public class SplitterImplTest {
 
     public void testSplitData_WithOKInput() throws Exception {
         //given
-        String input = "L:3;VCB:10;ASW:10;UST:10;";
+        String input = "NUM:4;VCB:10;UBT:10;TMR:10;TMP:10;";
         //when
         Map<String, String> splitdata = splitter.splitData(input);
         //then
-        assertEquals(splitdata.size(), 3);
+        assertEquals(splitdata.size(), 4);
         assertTrue(splitdata.containsKey("VCB"));
-        assertTrue(splitdata.containsKey("ASW"));
-        assertTrue(splitdata.containsKey("UST"));
+        assertTrue(splitdata.containsKey("UBT"));
+        assertTrue(splitdata.containsKey("TMR"));
+        assertTrue(splitdata.containsKey("TMP"));
     }
 
     public void testSplitData_WithOKInput_ContainingOneElement() throws Exception {
         //given
-        String input = "L:1;VCB:10;";
+        String input = "NUM:1;VCB:10;";
         //when
         Map<String, String> splitdata = splitter.splitData(input);
         //then
@@ -44,7 +45,7 @@ public class SplitterImplTest {
 
     public void testSplitData_WithOKInput_AndOneIncorrectParameter_ContainingOneElement() throws Exception {
         //given
-        String input = "L:2;VCB:10;AAA:10;";
+        String input = "NUM:2;VCB:10;AAA:10;";
         //when
         Map<String, String> splitdata = splitter.splitData(input);
         //then
@@ -54,7 +55,7 @@ public class SplitterImplTest {
 
     public void testSplitData_WithOKInput_AndAllIncorrectParameters_ReturnsEmptyList() throws Exception {
         //given
-        String input = "L:2;BBB:10;AAA:10;";
+        String input = "NUM:2;BBB:10;AAA:10;";
         //when
         Map<String, String> splitdata = splitter.splitData(input);
         //then
@@ -63,7 +64,7 @@ public class SplitterImplTest {
 
     public void testSplitData_WithZeroLengthInput() throws Exception {
         //given
-        String input = "L:0;";
+        String input = "NUM:0;";
         //when
         Map<String, String> splitdata = splitter.splitData(input);
         //then
@@ -71,14 +72,14 @@ public class SplitterImplTest {
         assertEquals(splitdata, Collections.emptyMap());
     }
 
-    @Test(expectedExceptions = IllegalArgumentException.class)
+    @Test(expectedExceptions = DataValidationException.class)
     public void testSplitData_WithNullInput() throws Exception {
         //given - when
         splitter.splitData(null);
         //then throw IAE
     }
 
-    @Test(expectedExceptions = IllegalArgumentException.class)
+    @Test(expectedExceptions = DataValidationException.class)
     public void testSplitData_WithEmptyInput() throws Exception {
         //given - when
         splitter.splitData("");
@@ -88,7 +89,7 @@ public class SplitterImplTest {
     @Test(expectedExceptions = DataValidationException.class)
     public void testSplitData_WithOKInput_AndInvalidNumberOfParams() throws Exception {
         //given
-        String input = "L:2;AA:10;BB:10;CC:10;";
+        String input = "NUM:2;AA:10;BB:10;CC:10;";
         //when
         splitter.splitData(input);
         //then throw exception
